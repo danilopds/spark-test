@@ -1,0 +1,8 @@
+### Scala template
+
+*.log
+
+# IntelliJ project files
+.idea
+
+semantinx/src/test/
