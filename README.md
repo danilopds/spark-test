@@ -1,3 +1,0 @@
-# spark-test
-
-asdf
