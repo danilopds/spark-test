@@ -8,8 +8,39 @@ import org.apache.spark.rdd.RDD
   */
 object Engine {
 
-  def getTotalErrors(logs :RDD[LogLine]): Long = {
+  def getUniqueHosts(logs :RDD[LogLine]): Long = {
+    logs
+      .map(_.clientHost)
+      .distinct()
+      .count()
+  }
 
-    logs.filter(_.httpReplyCode == 404).count()
+  def getTotalErrors(logs :RDD[LogLine]): Long = {
+    logs
+      .filter(_.httpReplyCode == 404)
+      .count()
+  }
+
+  def getTopBrokenURLs(logs :RDD[LogLine]) : Array[(String, Int)] = {
+    logs
+      .filter(_.httpReplyCode == 404)
+      .map(l => (l.requestPath, 1))
+      .reduceByKey(_ + _)
+      .sortBy(_._2, ascending = false)
+      .take(5)
+  }
+
+  def getTotalErrorsByDay(logs :RDD[LogLine]) : Array[(String, Int)] = {
+    logs
+      .filter(_.httpReplyCode == 404)
+      .map(l => (l.dateTimestamp.toLocalDate.toString(), 1))
+      .reduceByKey(_ + _)
+      .collect()
+  }
+
+  def getTotalBytes(logs :RDD[LogLine]) : Double = {
+    logs
+      .map(_.bytesSent)
+      .sum()
   }
 }

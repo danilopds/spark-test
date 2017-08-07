@@ -21,12 +21,29 @@ object AppTest {
 
     // getting requests
     val logRequests = dataCollector.getLogs
+    /*logRequests.foreach(println)*/
+
+    //question 1
+    val hosts = Engine.getUniqueHosts(logRequests)
+    println("Number of unique hosts: "+hosts)
 
     //question 2
     val errors = Engine.getTotalErrors(logRequests)
     println("Number of 404 errors: "+errors)
 
-    /*logRequests.foreach(println)*/
+    //question 3
+    val brokenURLs = Engine.getTopBrokenURLs(logRequests)
+    brokenURLs.foreach(println)
+
+    //question 4
+    val brokenURLsByDay = Engine.getTotalErrorsByDay(logRequests)
+    brokenURLsByDay.foreach(println)
+
+    //question 5
+    val bytesReturned = Engine.getTotalBytes(logRequests)
+    println("Total of returned bytes: "+bytesReturned)
+
+
 
   }
 
