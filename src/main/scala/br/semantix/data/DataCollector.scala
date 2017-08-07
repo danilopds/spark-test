@@ -33,7 +33,7 @@ class DataCollector(sc: SparkContext) {
         val m = p.matcher(line)
 
         val output = if (!m.find) {
-          println("Rejected Log Line: " + line)
+          /*println("Rejected Log Line: " + line)*/
           LogLine("Empty", "-", "-", Helpers.getDateTime("01/Aug/2017:00:00:01 -0400"), "", -1, -1)
         }
         else {
@@ -49,7 +49,7 @@ class DataCollector(sc: SparkContext) {
         }
         output
       })
-      /*.filter(_.clientHost != "Empty")*/
+      .filter(_.clientHost != "Empty")
     logRequests
   }
 

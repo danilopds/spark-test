@@ -33,18 +33,17 @@ object AppTest {
 
     //question 3
     val brokenURLs = Engine.getTopBrokenURLs(logRequests)
+    println("Top 5 broken URLs: ")
     brokenURLs.foreach(println)
 
     //question 4
     val brokenURLsByDay = Engine.getTotalErrorsByDay(logRequests)
+    println("Broken URLs by day: ")
     brokenURLsByDay.foreach(println)
 
     //question 5
     val bytesReturned = Engine.getTotalBytes(logRequests)
     println("Total of returned bytes: "+bytesReturned)
-
-
-
   }
 
 }
