@@ -8,7 +8,13 @@ import com.typesafe.config.ConfigFactory
 object Settings {
   private val config = ConfigFactory.load()
 
-  //Plano Crescimento
-  //lazy val appName: String = weblogGen.getString("appName")
+  private val sparkSettings = config.getConfig("spark_settings")
+  private val hadoopSettings = config.getConfig("hadoop_settings")
+  private val logSettings = config.getConfig("log_settings")
+
+  lazy val appName: String = sparkSettings.getString("appName")
+  lazy val winUtils: String = hadoopSettings.getString("winUtils")
+  lazy val logJuly: String = logSettings.getString("logJuly")
+  lazy val logAugust: String = logSettings.getString("logAugust")
 
 }
